@@ -1,18 +1,18 @@
 import cv2
 import time
 from flask import Flask
+
 app = Flask(__name__)
-
 # frequency in seconds
-
-
-
 # capture_image(5,1)
+
+url = 'http://localhost:90/capture'
 
 @app.route("/Edge/<string:frequency>/<string:grayscale>")
 def capture_image(frequency,grayscale):
     img_counter = 0
     while True:
+        
         cam = cv2.VideoCapture(0)
         cv2.namedWindow("test")
         ret, frame = cam.read()
@@ -30,9 +30,9 @@ def capture_image(frequency,grayscale):
 
         print("{} written!".format(img_name))
         img_counter += 1
+
+        req.post(url,frame)
         time.sleep(int(frequency))
 
-
-
 if __name__ == "__main__":
-    app.run()
+    app.run(host='0.0.0.0', port=80)
