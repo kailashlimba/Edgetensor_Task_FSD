@@ -1,7 +1,15 @@
 import cv2
 import time
+from flask import Flask
+app = Flask(__name__)
+
 # frequency in seconds
 
+
+
+# capture_image(5,1)
+
+@app.route("/Edge/<string:frequency>/<string:grayscale>")
 def capture_image(frequency,grayscale):
     img_counter = 0
     while True:
@@ -17,11 +25,14 @@ def capture_image(frequency,grayscale):
         gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
         # cv2.imshow('Original image',image)
         # cv2.imshow('Gray image', gray)
-        if grayscale:
+        if int(grayscale):
             cv2.imwrite(img_name, gray)
 
         print("{} written!".format(img_name))
         img_counter += 1
-        time.sleep(5)
+        time.sleep(int(frequency))
 
-capture_image(5,1)
+
+
+if __name__ == "__main__":
+    app.run()
