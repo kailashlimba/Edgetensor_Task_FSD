@@ -31,7 +31,7 @@ def capture_image(frequency,grayscale):
         print("{} written!".format(img_name))
         img_counter += 1
 
-        req.post(url,frame)
+        # req.post(url,frame)
         time.sleep(int(frequency))
 
 if __name__ == "__main__":
