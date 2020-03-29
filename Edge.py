@@ -7,7 +7,7 @@ import requests as req
 # frequency in seconds
 
 
-url = 'http://localhost:90/capture'
+url = 'http://localhost:90/store'
 
 # prepare headers for http request
 content_type = 'image/jpeg'
@@ -25,7 +25,7 @@ def capture_image(frequency,grayscale):
         cam.release()
         cv2.destroyAllWindows()
         img_name = "opencv_frame_{}.png".format(img_counter)
-        cv2.imwrite(img_name, frame)
+        # cv2.imwrite(img_name, frame)
         image = cv2.imread(img_name)
         gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
         # cv2.imshow('Original image',image)
@@ -45,6 +45,6 @@ def capture_image(frequency,grayscale):
         time.sleep(int(frequency))
 
 
-capture_image(5,1)
+capture_image(5,0)
 # if __name__ == "__main__":
 #     app.run(host='0.0.0.0', port=80)
